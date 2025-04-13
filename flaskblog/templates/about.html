@@ -1,4 +1,34 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>About Page</h1>
+<div class="container mt-4">
+    <div class="card shadow-lg border-0 rounded-3">
+        <div class="card-body">
+            <h1 class="text-center mb-4 text-primary">About Our Voting Platform</h1>
+            <p class="lead text-justify">
+                Welcome to <strong>EPICS</strong> – a next-generation secure online voting platform that 
+                empowers democracy with cutting-edge technology.
+            </p>
+            <p>
+                Our mission is to streamline and secure the voting process using 
+                <strong>Artificial Intelligence</strong>, <strong>Biometric Authentication</strong> (Face & Fingerprint), 
+                and <strong>Blockchain</strong> to ensure transparency, privacy, and efficiency.
+            </p>
+            <hr>
+            <h4 class="text-success">🔐 Key Features</h4>
+            <ul class="list-group list-group-flush mb-3">
+                <li class="list-group-item">✔️ Face and Fingerprint Verification</li>
+                <li class="list-group-item">✔️ Tamper-proof Blockchain Vote Storage</li>
+                <li class="list-group-item">✔️ Voter Identity Proof using Government Issued PDFs</li>
+                <li class="list-group-item">✔️ Decentralized and Transparent Vote Counting</li>
+                <li class="list-group-item">✔️ Real-time Admin Analytics and Region-wise Tallying</li>
+            </ul>
+            <p>
+                With <strong>ElectraChain</strong>, every vote is secure, anonymous, and verified – bringing the future of digital voting today.
+            </p>
+            <div class="text-center mt-4">
+                <a href="{{ url_for('home') }}" class="btn btn-primary btn-lg">Explore Platform</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}

@@ -1,27 +1,54 @@
 {% extends "layout.html" %}
 {% block content %}
+<style>
+    body {
+        background-color: #e3f2fd; /* Light blue background */
+    }
+</style>
+
+<div class="container mt-4">
+    <!-- Hero Section -->
+    <div class="p-5 mb-5 rounded shadow-sm text-center" style="background-color: #bbdefb;">
+        <h1 class="display-4 text-primary font-weight-bold">EPICS</h1>
+        <p class="lead text-dark">Electoral Portal for Indian Citizens 🗳️</p>
+        <hr class="my-3" style="border-color: #90caf9;">
+        <p class="text-dark">Secure • Transparent • Effortless Voting powered by AI, Biometrics, and Blockchain</p>
+        <a class="btn btn-outline-primary btn-lg" href="{{ url_for('about') }}" role="button">Learn More</a>
+    </div>
+
+    <!-- Posts Feed -->
     {% for post in posts.items %}
-        <article class="media content-section">
-          <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
-          <div class="media-body">
-            <div class="article-metadata">
-              <a class="mr-2" href="{{ url_for('user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
-              <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+    <article class="media content-section shadow-sm p-4 mb-4 bg-white rounded border border-primary-subtle">
+        <img class="rounded-circle article-img mr-3" style="height: 70px; width: 70px; object-fit: cover;"
+             src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
+        <div class="media-body">
+            <div class="article-metadata d-flex justify-content-between align-items-center">
+                <div>
+                    <a class="font-weight-bold text-primary" href="{{ url_for('user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
+                    <small class="text-muted ml-2">{{ post.date_posted.strftime('%B %d, %Y') }}</small>
+                </div>
             </div>
-            <h2><a class="article-title" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
-            <p class="article-content">{{ post.content }}</p>
-          </div>
-        </article>
+            <h2 class="mt-2">
+                <a class="text-dark article-title" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a>
+            </h2>
+            <p class="article-content text-muted">{{ post.content }}</p>
+        </div>
+    </article>
     {% endfor %}
-    {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-      {% if page_num %}
-        {% if posts.page == page_num %}
-          <a class="btn btn-info mb-4" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a>
-        {% else %}
-          <a class="btn btn-outline-info mb-4" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a>
-        {% endif %}
-      {% else %}
-        ...
-      {% endif %}
-    {% endfor %}
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center mt-4">
+        {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+            {% if page_num %}
+                {% if posts.page == page_num %}
+                    <a class="btn btn-info mx-1" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a>
+                {% else %}
+                    <a class="btn btn-outline-info mx-1" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a>
+                {% endif %}
+            {% else %}
+                <span class="mx-2">…</span>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
 {% endblock content %}
